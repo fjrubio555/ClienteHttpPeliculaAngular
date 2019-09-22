@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2><b>Películas</b></h2>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addPeliculaModal" (click)="getNavegacion('anyadir', '')"><i class="material-icons">
+            add_circle</i> <span>Nueva Película</span></a>
+          </div>
+        </div>
+      </div>
+      <table datatable id="peliculaTabla" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" dt-instance="dtInstance" class="table table-striped table-hover" >
+        <thead>
+          <tr>
+            <th>#Id</th>
+            <th>Título</th>
+            <th>Director</th>
+            <th>Año de Estreno</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor = 'let pelis of this.todasPelis; let i =index;'>
+            <td>{{ pelis.id }}</td>
+            <td>{{ pelis.titulo }}</td>
+            <td>{{ pelis.director }}</td>
+            <td>{{ pelis.estreno }}</td>
+            <td>
+              <a href="#" class="edit" data-toggle="modal" (click)="getNavegacion('modificar', pelis.id)"><i class="material-icons"
+                  data-toggle="tooltip" title="Editar" >&#xE254;</i></a>
+              <a href="#borrarPeliculaModal" class="delete" data-toggle="modal" (click)=setPeliSelect(pelis.id)><i class="material-icons"
+                  data-toggle="tooltip" title="Borrar">&#xE872;</i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="bntBuscar" type="button" class="btn btn-outline-dark" [disabled]="isDisabled" (click)="open(buscador)">Buscar</button>
+    </div>
+  </div>
+  <!--Ventana Modal Borrar -->
+ <div id="borrarPeliculaModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form (ngSubmit)="deletePelicula(getPeliSelect())">
+          <div class="modal-header">
+            <h4 class="modal-title">Borrar Película</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="getNavegacion('', '')">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>¿Seguro que quieres eliminar esta película?</p>
+            <p class="text-warning"><small>Esta acción no se puede deshacer.</small></p>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar" (click)="getNavegacion('', '')">
+            <input type="submit" class="btn btn-danger" value="Borrar" onclick="$('.modal').modal('hide')">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #buscador let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-busqueda">{{modal_titulo}}</h4>
+      <button type="button" class="close" aria-label="Cerrar" (click)="modal.dismiss('Cerrar')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="Buscador">{{modal_texto_cab}}</label>
+          <div class="input-group">
+            <input  [(ngModel)]='busqueda' type="text" class="form-control" placeholder={{modal_texto_def}} id="txtBuscador" name="Buscador"/>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-warning" (click)="modal.dismiss('Buscar')">Buscar</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cancelar')">Cancelar</button>
+    </div>
+  </ng-template>
+     

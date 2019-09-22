@@ -1,0 +1,51 @@
+<!-- Ventana Modal Añadir -->
+<div id="addPeliculaModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="peliculaForm" (ngSubmit)="salvarPelicula(peliculaForm.value)">
+        <div class="modal-header">
+          <h4 class="modal-title">Añadir Película</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="getNavegacion('', '')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Título</label>
+            <input type="text" class="form-control" placeholder="Título" formControlName="titulo" required>
+            <div class="alert-danger"
+              *ngIf="!peliculaForm.controls['titulo'].valid && (peliculaForm.controls['titulo'].touched)">
+              <div [hidden]="!peliculaForm.controls['titulo'].errors.required">
+                Inserte el título ya que es necesario.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Director</label>
+            <input type="text" class="form-control" placeholder="Director" formControlName="director" required>
+            <div class="alert-danger"
+              *ngIf="!peliculaForm.controls['director'].valid && (peliculaForm.controls['director'].touched)">
+              <div [hidden]="!peliculaForm.controls['director'].errors.required">
+                Inserte director ya que es necesario.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Año de Estreno</label>
+            <input type="number" class="form-control" placeholder="Año de Estreno" formControlName="estreno" required>
+            <div class="alert-danger"
+              *ngIf="!peliculaForm.controls['estreno'].valid && (peliculaForm.controls['estreno'].touched)">
+              <div [hidden]="!peliculaForm.controls['estreno'].errors.required">
+                Inserte año de estreno ya que es necesario.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"
+            (click)="getNavegacion('', '')">
+          <input type="submit" class="btn btn-success" value="Añadir" onclick="$('.modal').modal('hide')" [disabled]="!peliculaForm.valid">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

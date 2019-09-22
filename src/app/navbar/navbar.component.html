@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="navbar-brand" href="" (click)="getNavegacion('', '')">
+      <img src="../assets/images/Angular.png" alt="" class="d-inline-block align-top">
+      Cliente
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="" routerLinkActive ="active">Películas </a>
+        <a class="nav-item nav-link active" routerLink="/consulta/1" (click)="setVarNab('1')" routerLinkActive ="active current">Título</a>
+        <a class="nav-item nav-link active" routerLink="/consulta/2" (click)="setVarNab('2')" routerLinkActive ="active current">Director</a>
+        <a class="nav-item nav-link active" routerLink="/consulta/3" (click)="setVarNab('3')" routerLinkActive ="active current">Estreno</a>
+        
+      </div>
+    </div>
+  </nav>
